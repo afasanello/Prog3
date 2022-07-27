@@ -1,0 +1,65 @@
+#code, #internal, #source {
+    width: 100%;
+    margin: 10px;
+}
+
+
+#code code {
+    color: #E3E3E3;
+}
+
+.line {
+    padding: 0px 30px;
+    margin: 0px;
+    height: 20px;
+}
+
+.markedBorder {
+    border: 2px solid red !important;
+}
+
+.line:nth-child(even) {
+    background-color: #222222;
+}
+
+.line:nth-child(odd) {
+    background-color: #2E2E2E;
+}
+
+.line.selected {
+    background-color: #555555;
+}
+
+.line:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.line:last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+span.name {
+    color: rgb(220, 220, 170);
+}
+
+span.header {
+    color: rgb(53, 140, 214);
+}
+
+span.parameter {
+    color: rgb(156, 205, 196);
+}
+
+span.comment {
+    color: rgb(106, 153, 85);
+}
+
+span.brackets {
+    color: rgb(255, 180, 23);
+}
+
+span.loop {
+    color: rgb(197, 134, 192);
+}

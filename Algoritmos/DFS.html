@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Algoritmo DFS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="css/code.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style type="text/css">
+      #network_0, #network_1 {
+        width: 100%;
+        height: 350px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content m-4">
+        <div class="row">
+            <div class="col">
+                <h2>Algoritmo DFS</h2>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="input-group m-2">
+                            <span class="input-group-text">Nodo a empezar: </span><input class="form-control" type="number" min="1" max="7" id="startingNode" value="1" />
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-primary m-2 col-12" onclick="start()">Iniciar algoritmo</button>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-primary m-2 col-12" onclick="stop()">Pausa</button>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-primary m-2 col-12" onclick="nextStep()">Avanzar un paso</button>
+                    </div>
+                </div>
+                
+                
+                
+                
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div id="network_0"></div>
+
+                <div id="network_1"></div>
+            </div>
+            <div class="col-9">
+                <div class="row">
+                    <div class="col">
+                        <div id="internal">
+                            <h3>Listas de adyacencia:</h3>
+                            <div class="table-responsive">
+                                <table class="table table-light table-bordered table-sm align-middle text-center">
+                                    <tbody>
+                                        <tr>
+                                            <th style="width: 12.5%">1</th>
+                                            <td style="width: 12.5%" class="adj" id="adj_1_0"></td>
+                                            <td style="width: 12.5%" class="adj" id="adj_1_1"></td>
+                                            <td style="width: 12.5%" class="adj" id="adj_1_2"></td>
+                                            <td style="width: 12.5%" class="adj" id="adj_1_3"></td>
+                                            <td style="width: 12.5%" class="adj" id="adj_1_4"></td>
+                                            <td style="width: 12.5%" class="adj" id="adj_1_5"></td>
+                                            <td style="width: 12.5%" class="adj" id="adj_1_6"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>2</th>
+                                            <td class="adj" id="adj_2_0"></td>
+                                            <td class="adj" id="adj_2_1"></td>
+                                            <td class="adj" id="adj_2_2"></td>
+                                            <td class="adj" id="adj_2_3"></td>
+                                            <td class="adj" id="adj_2_4"></td>
+                                            <td class="adj" id="adj_2_5"></td>
+                                            <td class="adj" id="adj_2_6"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>3</th>
+                                            <td class="adj" id="adj_3_0"></td>
+                                            <td class="adj" id="adj_3_1"></td>
+                                            <td class="adj" id="adj_3_2"></td>
+                                            <td class="adj" id="adj_3_3"></td>
+                                            <td class="adj" id="adj_3_4"></td>
+                                            <td class="adj" id="adj_3_5"></td>
+                                            <td class="adj" id="adj_3_6"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>4</th>
+                                            <td class="adj" id="adj_4_0"></td>
+                                            <td class="adj" id="adj_4_1"></td>
+                                            <td class="adj" id="adj_4_2"></td>
+                                            <td class="adj" id="adj_4_3"></td>
+                                            <td class="adj" id="adj_4_4"></td>
+                                            <td class="adj" id="adj_4_5"></td>
+                                            <td class="adj" id="adj_4_6"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>5</th>
+                                            <td class="adj" id="adj_5_0"></td>
+                                            <td class="adj" id="adj_5_1"></td>
+                                            <td class="adj" id="adj_5_2"></td>
+                                            <td class="adj" id="adj_5_3"></td>
+                                            <td class="adj" id="adj_5_4"></td>
+                                            <td class="adj" id="adj_5_5"></td>
+                                            <td class="adj" id="adj_5_6"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>6</th>
+                                            <td class="adj" id="adj_6_0"></td>
+                                            <td class="adj" id="adj_6_1"></td>
+                                            <td class="adj" id="adj_6_2"></td>
+                                            <td class="adj" id="adj_6_3"></td>
+                                            <td class="adj" id="adj_6_4"></td>
+                                            <td class="adj" id="adj_6_5"></td>
+                                            <td class="adj" id="adj_6_6"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>7</th>
+                                            <td class="adj" id="adj_7_0"></td>
+                                            <td class="adj" id="adj_7_1"></td>
+                                            <td class="adj" id="adj_7_2"></td>
+                                            <td class="adj" id="adj_7_3"></td>
+                                            <td class="adj" id="adj_7_4"></td>
+                                            <td class="adj" id="adj_7_5"></td>
+                                            <td class="adj" id="adj_7_6"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <br />
+                            <h3>Pila:</h3>
+                            <div class="table-responsive">
+                                <table class="table table-light table-bordered table-sm align-middle text-center">
+                                    <tbody>
+                                        <tr>
+                                            <th>S</th>
+                                            <td colspan="2" style="text-align: left; padding: 0px 0px 0px 10px" class="stack" id="stack"></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="width: 12.5%">Vértice</th>
+                                            <td style="width: 12.5%" class="vertex"></td>
+                                            <td style="width: 75%"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <br />
+                            <h3>Arreglos:</h3>
+                            <div class="table-responsive">
+                                <table class="table table-light table-bordered table-sm align-middle text-center">
+                                    <tbody>
+                                        <tr>
+                                            <th style="width: 12.5%">v</th>
+                                            <th style="width: 12.5%">1</th>
+                                            <th style="width: 12.5%">2</th>
+                                            <th style="width: 12.5%">3</th>
+                                            <th style="width: 12.5%">4</th>
+                                            <th style="width: 12.5%">5</th>
+                                            <th style="width: 12.5%">6</th>
+                                            <th style="width: 12.5%">7</th>
+                                        </tr>
+                                        <tr>
+                                            <th>explorado[v]</th>
+                                            <td class="visited" id="visited_0"></td>
+                                            <td class="visited" id="visited_1"></td>
+                                            <td class="visited" id="visited_2"></td>
+                                            <td class="visited" id="visited_3"></td>
+                                            <td class="visited" id="visited_4"></td>
+                                            <td class="visited" id="visited_5"></td>
+                                            <td class="visited" id="visited_6"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>padre[v]</th>
+                                            <td class="parent" id="parent_0"></td>
+                                            <td class="parent" id="parent_1"></td>
+                                            <td class="parent" id="parent_2"></td>
+                                            <td class="parent" id="parent_3"></td>
+                                            <td class="parent" id="parent_4"></td>
+                                            <td class="parent" id="parent_5"></td>
+                                            <td class="parent" id="parent_6"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>padreAux[v]</th>
+                                            <td class="parentAux" id="parentAux_0"></td>
+                                            <td class="parentAux" id="parentAux_1"></td>
+                                            <td class="parentAux" id="parentAux_2"></td>
+                                            <td class="parentAux" id="parentAux_3"></td>
+                                            <td class="parentAux" id="parentAux_4"></td>
+                                            <td class="parentAux" id="parentAux_5"></td>
+                                            <td class="parentAux" id="parentAux_6"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div id="source">
+                            <h3>Pseudocódigo: DFS</h3>
+                            <div id="code">
+                                <div class="line"></div>
+                                <div class="line"><pre><code><span class="header">void</span> <span class="name">DFS</span><span class="brackets">(</span><span class="header">grafo</span> <span class="parameter">G</span>, <span class="header">nodo</span> <span class="parameter">w</span><span class="brackets">) {</span></code></pre></div>
+                                <div class="line"><pre><code>    <span class="parameter">T</span> = <span class="name">crearArbol</span><span class="brackets">()</span>;  <span class="comment">// OPCIONAL</span></code></pre></div>
+                                <div class="line"></div>
+                                <div class="line"><pre><code>    <span class="comment">// Inicializamos los vértices</span></code></pre></div>
+                                <div class="line"><pre><code>    <span class="loop">for</span><span class="brackets">(</span><span class="parameter">u</span> <span class="loop">in</span> <span class="parameter">vértices</span><span class="brackets">(</span><span class="parameter">G</span><span class="brackets">)) {</span></code></pre></div>
+                                <div class="line"><pre><code>        <span class="parameter">explorado</span><span class="brackets">[</span><span class="parameter">u</span><span class="brackets">]</span> = <span class="header">false</span>;</code></pre></div>
+                                <div class="line"><pre><code>        <span class="parameter">padre</span><span class="brackets">[</span><span class="parameter">u</span><span class="brackets">]</span> = <span class="header">NULL</span>;</code></pre></div>
+                                <div class="line"><pre><code>        <span class="parameter">padreAux</span><span class="brackets">[</span><span class="parameter">u</span><span class="brackets">]</span> = <span class="header">NULL</span>;</code></pre></div>
+                                <div class="line"><pre><code>        <span class="name">agregarNodo</span><span class="brackets">(</span><span class="parameter">T</span>, <span class="parameter">u</span><span class="brackets">)</span>;  <span class="comment">// OPCIONAL</span></code></pre></div>
+                                <div class="line"><pre><code>    <span class="brackets">}</span></code></pre></div>
+                                <div class="line"></div>
+                                <div class="line"><pre><code>    <span class="comment">// Creamos la pila, y apilamos el primer elemento</span></code></pre></div>
+                                <div class="line"><pre><code>    <span class="parameter">S</span> = <span class="name">crearPila</span><span class="brackets">()</span>;</code></pre></div>
+                                <div class="line"><pre><code>    <span class="name">apilar</span><span class="brackets">(</span><span class="parameter">S</span>, <span class="parameter">w</span><span class="brackets">)</span>;</code></pre></div>
+                                <div class="line"></div>
+                                <div class="line"><pre><code>    <span class="loop">while</span><span class="brackets">(</span>!<span class="name">esVacia</span><span class="brackets">(</span><span class="parameter">S</span><span class="brackets">)) {</span></code></pre></div>
+                                <div class="line"><pre><code>        <span class="comment">// Extraemos el nodo u de la pila S</span></code></pre></div>
+                                <div class="line"><pre><code>        <span class="parameter">u</span> = <span class="name">desapilar</span><span class="brackets">(</span><span class="parameter">S</span><span class="brackets">)</span>;</code></pre></div>
+                                <div class="line"></div>
+                                <div class="line"><pre><code>        <span class="comment">// Exploramos el nodo seleccionado</span></code></pre></div>
+                                <div class="line"><pre><code>        <span class="loop">if</span><span class="brackets">(</span>!<span class="parameter">explorado</span><span class="brackets">[</span><span class="parameter">u</span><span class="brackets">]) {</span></code></pre></div>
+                                <div class="line"><pre><code>            <span class="parameter">explorado</span><span class="brackets">[</span><span class="parameter">u</span><span class="brackets">]</span> = <span class="header">true</span>;</code></pre></div>
+                                <div class="line"></div>
+                                <div class="line"><pre><code>            <span class="comment">//  Agregamos la arista al árbol DFS (OPCIONAL)</span></code></pre></div>
+                                <div class="line"><pre><code>            <span class="loop">if</span><span class="brackets">(</span><span class="parameter">u</span> != <span class="parameter">w</span><span class="brackets">) {</span></code></pre></div>
+                                <div class="line"><pre><code>                <span class="name">agregarArista</span><span class="brackets">(</span><span class="parameter">T</span>, <span class="parameter">u</span>, <span class="parameter">padreAux</span><span class="brackets">[</span><span class="parameter">u</span><span class="brackets">])</span>;</code></pre></div>
+                                <div class="line"><pre><code>                <span class="parameter">padre</span><span class="brackets">[</span><span class="parameter">u</span><span class="brackets">]</span> = <span class="parameter">padreAux</span><span class="brackets">[</span><span class="parameter">u</span><span class="brackets">]</span>;</code></pre></div>
+                                <div class="line"><pre><code>            <span class="brackets">}</span></code></pre></div>
+                                <div class="line"></div>
+                                <div class="line"><pre><code>            <span class="comment">// Apilamos todos los nodos adyacentes al nodo u.</span></code></pre></div>
+                                <div class="line"><pre><code>            <span class="loop">for</span><span class="brackets">(</span><span class="parameter">v</span> <span class="loop">in</span> <span class="parameter">adyacencia</span><span class="brackets">[</span><span class="parameter">u</span><span class="brackets">]) {</span></code></pre></div>
+                                <div class="line"><pre><code>                <span class="name">apilar</span><span class="brackets">(</span><span class="parameter">S</span>, <span class="parameter">v</span><span class="brackets">)</span>;</code></pre></div>
+                                <div class="line"><pre><code>                <span class="parameter">padreAux</span><span class="brackets">[</span><span class="parameter">v</span><span class="brackets">]</span> = <span class="parameter">u</span>;</code></pre></div>
+                                <div class="line"><pre><code>            <span class="brackets">}</span></code></pre></div>
+                                <div class="line"><pre><code>        <span class="brackets">}</span></code></pre></div>
+                                <div class="line"><pre><code>    <span class="brackets">}</span></code></pre></div>
+                                <div class="line"></div>
+                                <div class="line"><pre><code>    <span class="name">eliminarPila</span><span class="brackets">(</span><span class="parameter">S</span><span class="brackets">)</span>;</code></pre></div>
+                                <div class="line"><pre><code><span class="brackets">}</span></code></pre></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/DFS.js" type="text/javascript"></script>
+  </body>
+</html>
